@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * Created by marus505 on 2017. 4. 24..
  */
@@ -91,14 +89,40 @@ public class PersonOverviewController {
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
         } else {
-            //아무것도 선택하지 않음
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait();
+            noSelected();
         }
+    }
+
+    @FXML
+    private void handleNewPerson() {
+        Person tempPerson = new Person();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        if (okClicked) {
+            mainApp.getPersonData().add(tempPerson);
+        }
+    }
+
+    @FXML
+    private void handleEditPerson() {
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean onClicked = mainApp.showPersonEditDialog(selectedPerson);
+            if (onClicked) {
+                showPersonDetails(selectedPerson);
+            }
+        } else {
+            noSelected();
+        }
+    }
+
+    private void noSelected() {
+        //아무것도 선택하지 않음
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(mainApp.getPrimaryStage());
+        alert.setTitle("No Selection");
+        alert.setHeaderText("No Person Selected");
+        alert.setContentText("Please select a person in the table.");
+
+        alert.showAndWait();
     }
 }
