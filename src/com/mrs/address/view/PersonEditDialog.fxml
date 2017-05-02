@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mrs.address.controller.PersonEditDialogController">
+<AnchorPane prefHeight="300.0" prefWidth="420.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mrs.address.controller.PersonEditDialogController">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="215.0" prefWidth="380.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
@@ -40,9 +39,9 @@
             <TextField fx:id="birthdayField" prefHeight="40.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <ButtonBar layoutX="190.0" layoutY="246.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="164.0" layoutY="246.0" prefHeight="40.0" prefWidth="240.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#handleOK" text="OK" />
+          <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOK" text="OK" />
             <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
         </buttons>
       </ButtonBar>
