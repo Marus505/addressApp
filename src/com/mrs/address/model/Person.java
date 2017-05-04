@@ -1,7 +1,9 @@
 package com.mrs.address.model;
 
+import com.mrs.address.util.LocalDateAdapter;
 import javafx.beans.property.*;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 
@@ -31,10 +33,10 @@ public class Person {
         this.lastName = new SimpleStringProperty(lastName);
 
         //dummy
-        this.street = new SimpleStringProperty("some street");
-        this.postalCode = new SimpleIntegerProperty(1234);
-        this.city = new SimpleStringProperty("some city");
-        this.birthDay = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        this.street = new SimpleStringProperty("rosenburg st");
+        this.postalCode = new SimpleIntegerProperty(23436);
+        this.city = new SimpleStringProperty("Hamburg");
+        this.birthDay = new SimpleObjectProperty<LocalDate>(LocalDate.of(1989, 2, 21));
     }
 
     public String getFirstName() {
@@ -97,6 +99,7 @@ public class Person {
         this.city.set(city);
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthDay() {
         return birthDay.get();
     }

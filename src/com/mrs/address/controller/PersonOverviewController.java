@@ -8,6 +8,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by marus505 on 2017. 4. 24..
@@ -42,6 +48,10 @@ public class PersonOverviewController {
     private Label birthdayLabel;
 
     private MainApp mainApp;
+
+    private Person tempPerson;
+
+    private LocalDateTime lastClickTime;
 
     public PersonOverviewController() {
 
@@ -124,5 +134,54 @@ public class PersonOverviewController {
         alert.setContentText("Please select a person in the table.");
 
         alert.showAndWait();
+    }
+
+    /**
+     * 마우스를 클릭하면
+     */
+    @FXML
+    private void handleRowSelect(MouseEvent mouseEvent) {
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+
+            if (mouseEvent.isPrimaryButtonDown() && mouseEvent.getClickCount() == 2) {
+                boolean onClicked = mainApp.showPersonEditDialog(selectedPerson);
+                if (onClicked) {
+                    showPersonDetails(selectedPerson);
+                }
+            }
+
+            /*
+            if (selectedPerson != tempPerson) {
+                tempPerson = selectedPerson;
+                lastClickTime = LocalDateTime.now();
+            } else if ( selectedPerson == tempPerson) {
+                LocalDateTime now = LocalDateTime.now();
+                long diff = lastClickTime.until(now, ChronoUnit.MILLIS);
+                if (diff < 300) { // 더블클릭 속도를 300ms 로 설정함
+                    boolean onClicked = mainApp.showPersonEditDialog(selectedPerson);
+                    if (onClicked) {
+                        showPersonDetails(selectedPerson);
+                    }
+                } else {
+                    lastClickTime = LocalDateTime.now();
+                }
+            }
+            */
+
+        } else {
+            noSelected();
+        }
+    }
+
+    /**
+     * 테이블 뷰 에서 키를 입력했을 경우 엔터만 받아 수정화면을 띄움
+     * @param e
+     */
+    @FXML
+    private void handleRowSelectByKeyPressed(KeyEvent e) {
+        if (e.getCode().equals(KeyCode.ENTER)) {
+            handleEditPerson();
+        }
     }
 }
