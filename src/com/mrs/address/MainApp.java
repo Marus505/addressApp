@@ -4,14 +4,13 @@ package com.mrs.address;
  * Created by marus505 on 2017. 4. 24..
  */
 
-import com.mrs.address.controller.PersonEditDialogController;
-import com.mrs.address.controller.PersonOverviewController;
-import com.mrs.address.controller.RootLayoutController;
+import com.mrs.address.controller.*;
 import com.mrs.address.model.Person;
 import com.mrs.address.model.PersonListWrapper;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -243,6 +242,60 @@ public class MainApp extends Application {
             alert.setContentText("Could not save data from file:\n" + file.getPath());
 
             alert.showAndWait();
+        }
+    }
+
+    /**
+     * 생일 통계를 보여주기 위해 다이얼로그를 연다.
+     */
+    public void showBirthdayStatistics() {
+        try {
+            // FXML 파일을 불러와서 팝업의 새로운 Stage 를 만든다.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BirthdayStatistics.fxml"));
+            AnchorPane page = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // 연락처를 컨트롤러에 설정한다.
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 생년 통계를 보여주기 위해 다이얼로그를 연다.
+     */
+    public void showBirthyearStatistics() {
+        try {
+            // FXML 파일을 불러와서 팝업의 새로운 Stage 를 만든다.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BirthyearStatistics.fxml"));
+            AnchorPane page = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthyear Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // 연락처를 컨트롤러에 설정한다.
+            BirthyearStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

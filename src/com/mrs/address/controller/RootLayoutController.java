@@ -113,4 +113,20 @@ public class RootLayoutController {
     private void handleExit() {
         System.exit(0);
     }
+
+    /**
+     * 생일 차트를 연다.
+     */
+    @FXML
+    private void handleShowBirthdayStatistics() {
+        mainApp.showBirthdayStatistics();
+    }
+
+    /**
+     * 생년 차트를 연다.
+     */
+    @FXML
+    private void handleShowBirthyearStatistics() {
+        mainApp.showBirthyearStatistics();
+    }
 }

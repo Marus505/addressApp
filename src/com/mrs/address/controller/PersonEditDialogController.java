@@ -4,6 +4,7 @@ import com.mrs.address.model.Person;
 import com.mrs.address.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ public class PersonEditDialogController {
     private TextField cityField;
 
     @FXML
-    private TextField birthdayField;
+    private DatePicker birthdayField;
 
     private Stage dialogStage;
 
@@ -54,7 +55,8 @@ public class PersonEditDialogController {
         streetField.setText(person.getStreet());
         postalCodeField.setText(Integer.toString(person.getPostalCode()));
         cityField.setText(person.getCity());
-        birthdayField.setText(DateUtil.format(person.getBirthDay()));
+        //birthdayField.setText(DateUtil.format(person.getBirthDay()));
+        birthdayField.setValue(person.getBirthDay());
 
     }
 
@@ -70,7 +72,8 @@ public class PersonEditDialogController {
             person.setStreet(streetField.getText());
             person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
             person.setCity(cityField.getText());
-            person.setBirthDay(DateUtil.parse(birthdayField.getText()));
+            //person.setBirthDay(DateUtil.parse(birthdayField.getText()));
+            person.setBirthDay(birthdayField.getValue());
 
             okClicked = true;
             dialogStage.close();
@@ -112,12 +115,8 @@ public class PersonEditDialogController {
             errorMessage += "No valid city!\n";
         }
 
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
+        if (birthdayField.getValue() == null) {
             errorMessage += "No valid birthday!\n";
-        } else {
-            if (!DateUtil.validDate(birthdayField.getText())) {
-                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
-            }
         }
 
         if (errorMessage.length() == 0) {
