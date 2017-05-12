@@ -7,6 +7,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -40,6 +44,10 @@ public class PersonEditDialogController {
 
     @FXML
     private void initialize() {
+        /*birthdayField.setConverter(new StringConvertor<LocalDate>() {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        });*/
 
     }
 

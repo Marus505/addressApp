@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateUtil {
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_PATTERN = "yyyy.MM.dd";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
